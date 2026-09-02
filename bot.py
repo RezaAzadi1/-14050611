@@ -21,8 +21,19 @@
 """
 
 import os
+import asyncio
 import logging
 from decimal import Decimal, InvalidOperation
+
+# --- سازگاری با Python 3.14: از حذف ایجاد خودکار event loop جلوگیری می‌کند ---
+# کتابخانه python-telegram-bot (در run_polling) داخلی از asyncio.get_event_loop()
+# استفاده می‌کند که در پایتون 3.10+ منسوخ و در 3.14 حذف شده و خطا می‌دهد.
+# با ساختن و تنظیم صریح یک event loop قبل از اجرا، این مشکل مستقل از نسخه‌ی
+# پایتون حل می‌شود.
+try:
+    asyncio.get_event_loop()
+except RuntimeError:
+    asyncio.set_event_loop(asyncio.new_event_loop())
 
 from telegram import Update, ReplyKeyboardRemove
 from telegram.ext import (
