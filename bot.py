@@ -209,12 +209,22 @@ def calculate(hr_price: Decimal, fee_price: Decimal, output_ton: Decimal) -> str
     return "\n".join(lines)
 
 
+# ⚠️ هشدار امنیتی: توکن مستقیماً اینجا نوشته شده. این فایل را جایی عمومی
+# (گیت‌هاب، پیام‌رسان، ایمیل و ...) به اشتراک نگذارید — هرکس این توکن را
+# ببیند می‌تواند کنترل کامل ربات را در دست بگیرد. اگر توکن قبلاً جایی لو رفته،
+# از طریق @BotFather با دستور /revoke یک توکن جدید بگیرید و همان را اینجا جایگزین کنید.
+HARDCODED_TOKEN = "8711583126:AAGj_c5gfH5XS6irFXBaiVLux2MgrH4iyrY"
+
+
 def main() -> None:
-    token = os.environ.get(8711583126:AAGj_c5gfH5XS6irFXBaiVLux2MgrH4iyrY)
+    # اگر متغیر محیطی TELEGRAM_BOT_TOKEN ست شده باشد، همان اولویت دارد؛
+    # در غیر این صورت از توکن هاردکد شده بالا استفاده می‌شود.
+    token = os.environ.get("TELEGRAM_BOT_TOKEN") or HARDCODED_TOKEN
     if not token:
         raise SystemExit(
-            "متغیر محیطی TELEGRAM_BOT_TOKEN تنظیم نشده است.\n"
-            "قبل از اجرا این را تنظیم کنید:  export TELEGRAM_BOT_TOKEN='توکن شما'"
+            "توکن ربات تنظیم نشده است.\n"
+            "یا آن را در متغیر HARDCODED_TOKEN بالای فایل بگذارید، "
+            "یا export TELEGRAM_BOT_TOKEN='توکن شما' را قبل از اجرا اجرا کنید."
         )
 
     application = Application.builder().token(token).build()
