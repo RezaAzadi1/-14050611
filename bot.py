@@ -210,7 +210,7 @@ def calculate(hr_price: Decimal, fee_price: Decimal, output_ton: Decimal) -> str
 
 
 def main() -> None:
-    token = os.environ.get("TELEGRAM_BOT_TOKEN")
+    token = os.environ.get("8711583126:AAGj_c5gfH5XS6irFXBaiVLux2MgrH4iyrY")
     if not token:
         raise SystemExit(
             "متغیر محیطی TELEGRAM_BOT_TOKEN تنظیم نشده است.\n"
